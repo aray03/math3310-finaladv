@@ -98,8 +98,7 @@ You may discuss the problems below with anyone in the following set of people:
 			We want to find the $a_i$'s and $b_i$'s such that $p_A(x)p_B(x) = (p(x))^2$ because we want to find the labels on the dice that give us the same probabilities as rolling a pair of normal dice.
 
 			\subsection*{Part (c):}
-			
-			First to explain, we needed to take this step so that we could find all the possible factors of $p_A(x)$ and $p_B(x)$.  Since we know that $p_A(x)p_B(x) = (p(x))^2$, we can factor $p(x)$ into irreducible polynomials to find the possible factors of $p_A(x)$ and $p_B(x)$.
+		First to explain, we needed to take this step so that we could find all the possible factors of $p_A(x)$ and $p_B(x)$.  Since we know that $p_A(x)p_B(x) = (p(x))^2$, we can factor $p(x)$ into irreducible polynomials to find the possible factors of $p_A(x)$ and $p_B(x)$.
 
 			Actually doing it:
 
@@ -107,7 +106,8 @@ You may discuss the problems below with anyone in the following set of people:
 				p(x) &= x+x^2+x^3+x^4+x^5+x^6 \\
 				&= x(1+x)(1+x^2)(1-x+x^2)
 			\end{align*}
-
+		
+		
 			We can see that the factors of $p(x)$ are $p_1(x) = x$, $p_2(x) = 1+x$, $p_3(x) = 1+x^2$, and $p_4(x) = 1-x+x^2$.  Since we know that $p_A(x)p_B(x) = (p(x))^2$, 
 			
 			We can conclude that $p_A(x)$ must be of the form $p_1(x)^qp_2(x)^rp_3(x)^sp_4(x)^t$, where $0 \leq q,r,s,t \leq 2$. 
@@ -116,9 +116,24 @@ You may discuss the problems below with anyone in the following set of people:
 
 		
 			\subsection*{Part (d):}
+\subsection*{Proof}
+From the power series expansion of $e^x$ provided, let $x = -1$:
+$$e^{-1} = \frac{1}{e} = 1 - 1 + \frac{1}{2!} - \frac{1}{3!} + \dots + \frac{(-1)^n}{n!} + \frac{(-1)^{n+1}}{(n+1)!} + \dots$$
 
+Multiplying this by $n!$ gives:
+$$\frac{n!}{e} = n! \left( \sum_{k=0}^n \frac{(-1)^k}{k!} + \sum_{k=n+1}^\infty \frac{(-1)^k}{k!} \right)$$
 
-			\subsection*{Part (e):}
+Substituting the formula for $D_n$ derived in Part (c), we have:
+$$\frac{n!}{e} = D_n + n! \sum_{k=n+1}^\infty \frac{(-1)^k}{k!}$$
+$$D_n - \frac{n!}{e} = -n! \left( \frac{(-1)^{n+1}}{(n+1)!} + \frac{(-1)^{n+2}}{(n+2)!} + \dots \right)$$
+
+The term $E = \left| D_n - \frac{n!}{e} \right|$ is an alternating series. Based on our notes by the properties of alternating series, the remainder is less than the first omitted term:
+$$E < \left| \frac{n!}{(n+1)!} \right| = \frac{1}{n+1}$$
+
+For $n \geq 1$, the term $\frac{1}{n+1} \leq \frac{1}{2}$. Since the distance between $D_n$  and $\frac{n!}{e}$ is less than $1/2$, $D_n$ must be the nearest integer to $\frac{n!}{e}$.
+
+\subsection*{Conclusion:}
+This proves that $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.
 
 
 		\end{solution}
@@ -237,12 +252,46 @@ You may discuss the problems below with anyone in the following set of people:
 			\subsection*{Conclusion:}
 
 			Thus, we have shown that $D_n = nD_{n-1} +(-1)^n$.
+
 			\noindent\rule{\textwidth}{0.4pt}
 
-			\subsection*{Part (c):}
-			Now our goal is to make a closed formula for $D_n$ by using the Principle of Inclusion-Exclusion.  
-			
-			We can do this by counting the number of ways to send the invitations so that at least one person gets the correct invitation and then subtracting this from the total number of ways to send the invitations.
+\subsection*{Part (c):}
+            To compute a closed formula for $D_n$ using the Principle of Inclusion-Exclusion, let $S$ be the set of all $n!$ possible permutations of delivering $n$ invitations to $n$ friends. Let $A_i$ be the set of deliveries where friend $i$ receives their correct invitation. We are looking for $D_n$, the number of deliveries where no one receives the correct invitation, which is $|\bigcap_{i=1}^n \overline{A_i}|$.
+
+            According to the Principle of Inclusion-Exclusion:
+            \[ D_n = |S| - \sum |A_i| + \sum |A_i \cap A_j| - \dots + (-1)^n |A_1 \cap \dots \cap A_n| \]
+            
+            For $k$ $i_1, i_2, \dots, i_k$, the size of the intersection $|A_{i_1} \cap \dots \cap A_{i_k}|$ is the number of ways to arrange the invitations such that those $k$ specific people get the right ones, while the remaining $n-k$ are distributed in any of $(n-k)!$ ways. Since there are $\binom{n}{k}$ ways to choose these $k$ people, we have:
+            \begin{align*}
+                D_n &= \sum_{k=0}^n (-1)^k \binom{n}{k} (n-k)! \\
+                &= \sum_{k=0}^n (-1)^k \frac{n!}{k!(n-k)!} (n-k)! \\
+                &= \sum_{k=0}^n \frac{(-1)^k n!}{k!} \\
+                &= n! \left( 1 - 1 + \frac{1}{2!} - \frac{1}{3!} + \dots + \frac{(-1)^n}{n!} \right)
+            \end{align*}
+
+            \subsection*{Conclusion:}
+            The closed formula is $D_n = n! \sum_{k=0}^n \frac{(-1)^k}{k!}$.
+
+            \noindent\rule{\textwidth}{0.4pt}
+
+            \subsection*{Part (d):}
+            \subsection*{Proof}
+			As we figured out in part C we get write our formula as:
+            \[ \frac{1}{e} = \sum_{k=0}^{\infty} \frac{(-1)^k}{k!} = \left( \sum_{k=0}^{n} \frac{(-1)^k}{k!} \right) + \left( \sum_{k=n+1}^{\infty} \frac{(-1)^k}{k!} \right) \]
+            
+            Multiplying through by $n!$, we get:
+            \[ \frac{n!}{e} = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!} + n! \sum_{k=n+1}^{\infty} \frac{(-1)^k}{k!} \]
+            If we substitute our formula for $D_n$ from Part (c):
+            \[ \frac{n!}{e} = D_n + \left( \frac{(-1)^{n+1}}{n+1} + \frac{(-1)^{n+2}}{(n+1)(n+2)} + \dots \right) \]
+            
+            Let the error term be $R_n = \frac{n!}{e} - D_n$. This is an alternating series where the absolute value of the terms is strictly decreasing. By the Alternating Series Estimation Theorem, the magnitude of the remainder is less than the first omitted term:
+            \[ |R_n| = \left| \frac{n!}{e} - D_n \right| < \frac{1}{n+1} \]
+            
+            For $n \geq 2$, we have $|R_n| < \frac{1}{3} < \frac{1}{2}$. (For $n=1$, $D_1=0$ and $|0 - 1/e| \approx 0.36 < 0.5$). Since the distance between the integer $D_n$ and the value $n!/e$ is strictly less than $1/2$, $D_n$ must be the integer closest to $n!/e$.
+
+            \subsection*{Conclusion:}
+            Therefore, $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.	
+
 
 			
 			
