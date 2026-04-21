@@ -179,7 +179,75 @@ This proves that $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.
 			\end{itemize}
 			
 			\begin{solution}
-				
+							Bullwinkle can always win If he uses the correct strategy.
+
+                    \begin{center}
+\begin{tikzpicture}[scale=1]
+\tikzset{vertex/.style = {shape=circle, fill=black, draw, scale=0.50}}
+
+
+\begin{scope}
+    \foreach \x in {0,1,2}{
+        \foreach \y in {0,1,2,3}{
+            \node[vertex] (\x\y) at (\x,\y) {};
+    }}
+    \node[vertex] (s) at (-2, 1.5) {};
+    \node[below=2pt] at (s) {$s$};
+    \node[vertex] (t) at (4, 1.5) {};
+    \node[below=2pt] at (t) {$t$};
+    \draw[thick] (s) -- (00);
+    \draw[thick] (s) -- (01);
+    \draw[thick] (s) -- (02);
+    \draw[thick] (s) -- (03);
+    \draw[thick] (03) -- (13);
+    \draw[thick] (13) -- (23);
+    \draw[thick] (23) -- (t);
+    \draw[thick] (00) -- (10);
+    \draw[thick] (10) -- (20);
+    \draw[thick] (20) -- (21);
+    \draw[thick] (21) -- (22);
+    \draw[thick] (01) -- (11);
+    \draw[thick] (11) -- (12);
+    \node at (1, -0.7) {$T$};
+\end{scope}
+\end{tikzpicture}
+\vspace{1em}
+\begin{tikzpicture}[scale=1]
+\tikzset{vertex/.style = {shape=circle, fill=black, draw, scale=0.50}}
+\begin{scope}
+    \foreach \x in {0,1,2}{
+        \foreach \y in {0,1,2,3}{
+            \node[vertex] (\x\y) at (\x,\y) {};
+    }}
+    \node[vertex] (s) at (-2, 1.5) {};
+    \node[below=2pt] at (s) {$s$};
+    \node[vertex] (t) at (4, 1.5) {};
+    \node[below=2pt] at (t) {$t$};
+    \draw[thick, dashed] (s) -- (t);
+    \draw[thick, dashed] (t) -- (20);
+    \draw[thick, dashed] (t) -- (21);
+    \draw[thick, dashed] (t) -- (22);
+    \draw[thick, dashed] (21) -- (11);
+    \draw[thick, dashed] (02) -- (12);
+    \draw[thick, dashed] (12) -- (22);
+    \draw[thick, dashed] (00) -- (01);
+    \draw[thick, dashed] (01) -- (02);
+    \draw[thick, dashed] (02) -- (03);
+    \draw[thick, dashed] (10) -- (11);
+    \draw[thick, dashed] (12) -- (13);
+    \draw[thick, dashed] (22) -- (23);
+    \node at (1, -0.7) {$T'$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+                    
+                    As shown above the graph can be split into two disjoint spanning trees. We will call the two trees $T$ and $T'$. Both trees span all vertices without sharing any edges.
+
+					It is better for our purpose to create an equivalent game. Rocky removes single edges instead of coloring them red and Bullwinkle doubles an edge making it impossible for rocky to remove it. Bullwinkle wins the game if there is a path of doubled edges from S to T. 
+
+					The strategy for Bullwinkle is to use theorem 40 in the notes. According to the theorem ``if $T$ and $T'$ are spanning trees of a connected graph $G$ and $e \in E(T)-E(T')$, then there is an edge $e' \in E(T')-E(T)$ such that $T-e+e'$ is a spanning tree of $G$.'' This means that when rocky removes an edge $e$ from tree $T$ there will always be an edge $e'$ from $T'$ that will reconnect that tree. 
+
+					In practice the strategy is to pay attention to when rocky disconnects the spanning tree and to make sure to reconnect it with an edge from the second spanning tree. This guarantees that there will always be a path from s to t through the spanning tree.
 			\end{solution}
 	\end{questions}
 	
