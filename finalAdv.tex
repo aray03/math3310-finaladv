@@ -27,11 +27,13 @@
 \newtheorem{definition}{Definition}
 
 \title{Final Adventure}
-\author{Author \# 1 \\
-Author \# b \\
-Author \# 4 \\
-Author \# $\gamma$}
-\date{}
+\author{
+Matt Sorensen\\
+James Richardson \\
+Aidan Andersen \\
+Denzil Rogers\\
+}
+\date{April 24, 2026}
 
 \begin{document}
 \maketitle
@@ -496,6 +498,44 @@ This proves that $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.
 			So we have shown that $kxf_{k}(x)+x f_{k-1}(x) = f_{k}(x)$.
 
 			\subsection*{Part (b):}
+			To solve for $f_k(x)$ in the equation from part (a), we can rearrange the equation to get:
+			\begin{align*}
+				f_k(x) - kxf_{k}(x) &= x f_{k-1}(x) \\
+				f_k(x)(1 - kx) &= x f_{k-1}(x) \\
+				f_k(x) &= \frac{x f_{k	-1}(x)}{1 - kx}
+			\end{align*}
+
+			Now we can iterate this recurrence to obtain:
+			\begin{align*}
+				f_k(x) &= \frac{x f_{k-1}(x)}{1 - kx} \\
+				&= \frac{x}{1 - kx} \cdot \frac{x f_{k-2}(x)}{1 - (k-1)x} \\
+				&= \frac{x^2 f_{k-2}(x)}{(1 - kx)(1 - (k-1)x)} \\
+				&= \frac{x^2}{(1 - kx)(1 - (k-1)x)} \cdot \frac{x f_{k-3}(x)}{1 - (k-2)x} \\
+				&= \frac{x^3 f_{k-3}(x)}{(1 - kx)(1 - (k-1	)x)(1 - (k-2)x)} \\
+				&= \dots \\
+				&= \frac{x^k f_{0}(x)}{\prod_{r=1}^{k} (1 - rx)}
+			\end{align*}
+
+			We know that $f_0(x) = \sum_{n=0}^\infty \stirling{n}{0} x^n$. Since $\stirling{n}{0} = 0$ for all $n > 0$ and $\stirling{0}{0} = 1$, we have $f_0(x) = 1$. Thus, we can simplify to get:
+			\begin{align*}
+				f_k(x) &= \frac{x^k}{\prod_{r=1}^{k} (1 - rx)}
+			\end{align*}	
+
+			\subsection*{Conclusion:}
+			Thus, we have shown that $f_k(x) = x^k \prod_{r=1}^{k} \frac{1}{(1-rx)}$.
+
+			\subsection*{Part (c):}
+			To calculate $|\mathcal{N}|$ by using the Principle of Inclusion-Exclusion, we can let $A_i$ be a set where box $i$ is empty. We want to find the number of arrangements where no box is empty, which is $|\bigcap_{i=1}^t \overline{A_i}|$.
+
+			By the Principle of Inclusion-Exclusion as included in our notes, we have:
+			\begin{align*}
+				|\bigcap_{i=1}^t \overline{A_i}| &= \sum_{k=0}^t (-1)^k \binom{t}{k} (t-k)^s \\
+				&= t! \sum_{k=0}^t \frac{(-1)^k (t-k)^s}{k! (t-k)!}
+			\end{align*}
+
+			 Since $|\mathcal{N}| = t!\stirling{s}{t}$, we can conclude that $\stirling{s}{t} = \sum_{k=0}^t \frac{(-1)^k (t-k)^s}{k! (t-k)!}$.
+			\subsection*{Conclusion:}
+			Thus, we have shown that $\stirling{s}{t} = \sum_{k=0}^t \frac{(-1)^k (t-k)^s}{k! (t-k)!}$.
 			
 
 		\end{solution}
