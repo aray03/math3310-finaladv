@@ -444,7 +444,127 @@ This proves that $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.
 		\end{minipage}
 		
 		\begin{solution}
-			
+		For the following parts, we'll imagine a fantasy land of wizards. A graph will be referred to as a guild, as in a guild of wizards, a vertice will be a wizard tower and the wizards use connection spells to communicate, these are our edges.
+
+
+			\subsection*{Part A}
+
+			Wizards are starting to work together to form a chain of communication spells...
+
+			$\Delta H = 2$, every tower is connected to atmost 2 others. $d_{max} H = n$, Furthest any two towers can be is $n$ steps.
+
+			If every tower has at most 2 connections, the graph can only be a path or a cycle.
+			\begin{itemize}
+			\item{In a cycle, the furthest apart any two vertices can be is half way around the cycle.}
+			\item{In a path, the furthest distance is between the two ends.}
+			\end{itemize}
+
+			Taking the longest distance of a cycle as just a path, we know that there are $n+1$ vertices, and $n$ edges. 
+
+			Therefore, $N(n,2) = n+1$.
+
+			\subsection*{Part B}
+
+			A guild of wizards are now banding together, they want to have fast communication between all of them, unfortunately, they take a lot of power so one wizard tower can only support 3 connection spells. The guild wants to be well connected so they also only want to be two connection spells away at max.
+
+			Let's take a tower, $T$, as a one item set containing any one tower of the guild. The set $T_2$ is made of the neighboring towers of $T$. There can be 3 connections to $T$, so there are 3 neighbors.
+
+			The set $T_3$ is the far neighbors of $T$, they connect to the towers of $T_2$. Since the towers of $T_2$ use one connection spell connecting to $T$ they can use two new connections for new towers. $T_3$ will have two towers for every tower in $T_2$.
+
+			Since the guild doesn't want the distance to be more than 2, we cannot have far-far neighbors, we stop here.
+			\begin{enumerate}
+				\item $T$ has one tower
+				\item $T_2$ has three towers
+				\item $T_3$ has six towers ($3$ towers $\times 2$ spells) 
+			\end{enumerate}
+			Total = 10 towers.
+			Since this works for any one tower in the graph, we see that the max is 10. $N(2,3) = 10$
+
+			\subsection*{Part C}
+			Ignoring the wizards
+
+			The graph has 15 vertices and four edges each. In the classnotes, \underline{Theorem 33} states..
+
+			[Put in theorem 33 (under 18.3)]
+
+			We can take the first and second order adjacency matrix and compare. If all entries in $A^1 + A^2$ are greater than 0, the max distance is 2.
+				
+				{\setlength{\arraycolsep}{2pt} \[
+				A = \begin{bmatrix}
+				0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+				1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+				0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+				0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+				0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+				0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+				0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+				1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+				0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 \\
+				0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+				1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+				1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 \\
+				\end{bmatrix}
+				A^2 = \begin{bmatrix}
+					4 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+					0 & 4 & 0 & 2 & 1 & 0 & 1 & 1 & 1 & 2 & 1 & 0 & 1 & 1 & 1 \\
+					1 & 0 & 4 & 0 & 2 & 1 & 1 & 0 & 1 & 1 & 1 & 2 & 0 & 1 & 1 \\
+					1 & 2 & 0 & 4 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 2 & 0 & 1 \\
+					1 & 1 & 2 & 0 & 4 & 0 & 1 & 1 & 0 & 1 & 2 & 1 & 0 & 1 & 1 \\
+					1 & 0 & 1 & 1 & 0 & 4 & 0 & 2 & 1 & 0 & 1 & 2 & 1 & 1 & 1 \\
+					1 & 1 & 1 & 1 & 1 & 0 & 4 & 0 & 2 & 2 & 0 & 1 & 1 & 0 & 1 \\
+					1 & 1 & 0 & 1 & 1 & 2 & 0 & 4 & 0 & 0 & 2 & 1 & 1 & 1 & 1 \\
+					0 & 1 & 1 & 1 & 0 & 1 & 2 & 0 & 4 & 1 & 0 & 1 & 2 & 1 & 1 \\
+					1 & 2 & 1 & 1 & 1 & 0 & 2 & 0 & 1 & 4 & 1 & 0 & 1 & 1 & 0 \\
+					1 & 1 & 1 & 1 & 2 & 1 & 0 & 2 & 0 & 1 & 4 & 0 & 0 & 1 & 1 \\
+					1 & 0 & 2 & 0 & 1 & 2 & 1 & 1 & 1 & 0 & 0 & 4 & 1 & 1 & 1 \\
+					1 & 1 & 0 & 2 & 0 & 1 & 1 & 1 & 2 & 1 & 0 & 1 & 4 & 1 & 0 \\
+					1 & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 4 & 1 \\
+					1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 4 
+				\end{bmatrix}
+				\]}
+				{\setlength{\arraycolsep}{2pt}\[
+				A + A^2 = \begin{bmatrix}
+				4 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 2 \\
+				1 & 4 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 4 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 \\
+				1 & 2 & 1 & 4 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 \\
+				1 & 1 & 2 & 1 & 4 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 1 & 1 & 4 & 1 & 2 & 1 & 1 & 1 & 2 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 1 & 1 & 1 & 4 & 1 & 2 & 2 & 1 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 1 & 1 & 2 & 1 & 4 & 1 & 1 & 2 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 4 & 1 & 1 & 1 & 2 & 1 & 1 \\
+				1 & 2 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 4 & 1 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 1 & 2 & 1 & 1 & 2 & 1 & 1 & 4 & 1 & 1 & 1 & 1 \\
+				1 & 1 & 2 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 4 & 1 & 1 & 1 \\
+				1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 4 & 1 & 1 \\
+				2 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 4 & 2 \\
+				2 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 4 
+				\end{bmatrix}
+				\]}
+
+				There are no 0 entries in the $A+A^2$ matrix, therefore according to the theorem, the distance between any two points is at most 2.
+
+				\subsection*{Part D}
+
+				The wizards have researched their connection spells and have made them more efficient, a tower can now sustain 4 connection spells at once.
+
+				Theoretically, to find the max amount of towers the guild can cram in, we assume the guild branches out as efficiently as possible.
+				\begin{enumerate}
+					\item $T$ has one tower (and can have 4 neighbors)
+					\item $T_2$ has four towers
+					\item $T_3$ has 3 towers for each tower in $T_2$, 12 in total.
+				\end{enumerate}
+
+				The total amount of towers in this theoretical guild is 17 towers. \underline{The upper bound is 17 towers}
+
+				For the \underline{lower bound}, it's already been proven that \underline{15 towers} is possible, going lower does not help as we're looking for the max.
+
+				Let's hope these wizards aren't up to something evil...
+				
+
 		\end{solution}
 		
 		
