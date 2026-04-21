@@ -486,14 +486,13 @@ This proves that $D_n = \left\lfloor \frac{n!}{e} + \frac{1}{2} \right\rfloor$.
 
 			To show that $kxf_{k}(x)+x f_{k-1}(x) = f_{k}(x)$, we can use the recurrence relation for the Stirling numbers of the second kind as shown in our notes. We have:
 
-			\begin{align*}
-				kxf_{k}(x)+x f_{k-1}(x) &= kx \sum_{n=k}^\infty \stirling{n}{k}x^n + x \sum_{n=k-1}^\infty \stirling{n}{k-1}x^n \\
-				&= \sum_{n=k}^\infty k\stirling{n}{k}x^{n+1} + \sum_{n=k-1}^\infty \stirling{n}{k-1}x^{n+1} \\
-				&= \sum_{n=k+1}^\infty k\stirling{n-1}{k}x^{n} + \sum_{n=k}^\infty \stirling{n-1}{k-1}x^{n} \\
-				&= \sum_{n=k+1}^\infty (k\stirling{n-1}{k} + \stirling{n-1}{k-1}) x^{n} + k\stirling{k}{k}x^k \\
-				&= \sum_{n=k+1}^\infty \stirling{n}{k} x^{n} + k x^k \\
-				&= f_k(x)
-			\end{align*}
+	\begin{align*}
+kxf_{k}(x)+x f_{k-1}(x) &= \sum_{n=k+1}^\infty k\stirling{n-1}{k}x^{n} + \sum_{n=k}^\infty \stirling{n-1}{k-1}x^{n} \
+&= \sum_{n=k+1}^\infty (k\stirling{n-1}{k} + \stirling{n-1}{k-1}) x^{n} + \mathbf{\stirling{k-1}{k-1}x^k} \
+&= \sum_{n=k+1}^\infty \stirling{n}{k} x^{n} + \mathbf{1 \cdot x^k} \
+&= \sum_{n=k+1}^\infty \stirling{n}{k} x^{n} + \mathbf{\stirling{k}{k}x^k} \
+&= \sum_{n=k}^\infty \stirling{n}{k} x^n = f_k(x)
+\end{align*}	
 			
 			So we have shown that $kxf_{k}(x)+x f_{k-1}(x) = f_{k}(x)$.
 
