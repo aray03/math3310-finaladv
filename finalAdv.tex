@@ -713,7 +713,80 @@ kxf_{k}(x)+x f_{k-1}(x) &= \sum_{n=k+1}^\infty k\stirling{n-1}{k}x^{n} + \sum_{n
 		
 		
 		\begin{solution}
-			
+
+            Proof of Lemma 1: There exists a $(1,1)$-flock.
+            
+            As there is only one queen and one vertex, there are no restrictions on the flocks, thus satisfying the distance requirement.
+            \\\\
+
+            Proof of Lemma 2: There does not exist a $(4,4)$-flock.
+
+            When $n = q = 4$, the tournament is too constrained for every chicken to reach every other chicken in 1 or 2 steps.
+
+            We can prove this by method of exhaustion. If we assume a chicken $A$ pecks only one other chicken, it would need that chicken to peck all others to reach them in 2 steps. However, this orientation prevents the other chickens from reaching $A$ within the 2-step limit. After testing all possible edge orientations for 4 chickens, there is no configuration where all four chickens qualify as queens.
+            \\\\
+
+            Proof of Lemma 3: There is a $(6, 6)$-flock.
+
+            We can prove this by providing a valid example. If we arrange 6 chickens and orient the edges such that each chicken pecks the two chickens immediately following it in a circle, and also pecks one chicken across the circle, every chicken can reach any other in at most 2 steps.
+
+            This solution has all chickens acting as queens.
+            \\\\
+
+            Proof of Lemma 4: If there exists an $(k, k)$-flock, then there exists an $(k + 2, k + 2)$-flock, where $k$ is a positive integer.
+
+            We can prove this by method of induction, for both even and odd numbers.
+            \\\\
+
+            For odd numbers:
+            
+            Base case: Using lemma 1, we know that there exists a $(1, 1)$-flock.
+
+            Induction Hypothesis: This relationship holds true for some $k \geq 1$ ($k$ being an odd positive integer), that is, there exists a $(k, k)$-flock.
+
+            Induction Step: We must now show that this relationship continues to hold true for $k + 2$, that is, there exists a $(k+2, k+2)$-flock.
+
+            We can do this by introducing 2 new chickens, $A$ and $B$. We can then arrange them in a manner such that $A$ pecks $B$, $B$ pecks every chicken in the original flock, and every chicken in the original flock pecks $A$. Thus, the relationship holds true for $k+2$.
+
+            Conclusion: The relationship is true for $n = q = 1$, and the relationship’s truth for odd numbers of $n = q = k \geq 1$ implies its truth for $n = q = k + 2$ and so the relationship is true for all odd nonnegative integers by the Principle of Mathematical Induction.
+            \\\\
+
+            For even numbers:
+            
+            Base case: Using lemma 2, we know that there does not exist a $(4, 4)$-flock. Following that, we can treat the $(4, 4)$-flock as our $(k+2, k+2)$-flock, making our $(k, k)$-flock equivalent to the $(2, 2)$-flock. As we know that the $(4, 4)$-flock does not exist, it follows that the $(2, 2)$-flock also does not exist. However, by Lemma 3, we know that there exists a $(6, 6)$-flock, making that our base case.
+
+            Induction Hypothesis: This relationship holds true for some $k \geq 6$ ($k$ being an even positive integer), that is, there exists a $(k, k)$-flock.
+
+            Induction Step: We must now show that this relationship continues to hold true for $k + 2$, that is, there exists a $(k+2, k+2)$-flock. 
+            
+            We can do this by introducing 2 new chickens, $A$ and $B$. We can then arrange them in a manner such that $A$ pecks $B$, $B$ pecks every chicken in the original flock, and every chicken in the original flock pecks $A$. Thus, the relationship holds true for $k+2$.
+
+            Conclusion: The relationship is true for $n = q = 6$, and the relationship’s truth for odd numbers of $n = q = k \geq 6$ implies its truth for $n = q = k + 2$ and so the relationship is true for all even nonnegative integers by the Principle of Mathematical Induction.
+            \\\\
+
+            Proof of Lemma 5: For every positive integer $n$ except $2$ and $4$, there exists an $(n,n)$-flock.
+
+            Referring to the conclusions drawn from the proof of Lemma 4, we see that for every odd positive integer $n \geq 1$, there exists an $(n, n)$-flock. We also see that for every even positive integer $n \geq 6$, there exists an $(n, n)$-flock. 
+
+            Thus, we know that for every positive integer $n$ except $2$ and $4$, there exists an $(n,n)$-flock, confirming Lemma 5.
+            \\\\
+
+            Theorem 1: There exists an $(n,q)$-flock for all positive integers $n$ and $q$ with $n \geq q \geq 1$, except for 
+			$q = 2$ and arbitrary $n$, and $n = q = 4$.
+            \\\\
+            
+            Proof of Theorem 1:
+
+            Base Case: Using Lemma 1, we know that there exists a $(1, 1)$-flock ($n=1$). From Lemma 5, we know that there exists for every positive integer $n$ an $(n, n)$-flock, except 2 and 4.
+
+            Induction Hypothesis: This relationship holds true for some positive integer $k$, that is, there exists a $(k, q)$-flock for all $1 \leq q \leq k$, except when $q=2$ or when $k=q=4$.
+
+            Induction Step: We must now show that this relationship continues to hold true for $k + 1$, that is, there exists a $(k+1, k+1)$-flock. This was done in the proof of Lemma 4.
+
+            We must also show that this relationship exists when $q \leq k$. To create a flock of $(k+1, q)$, we simply add another chicken in a manner every original queen pecks this new chicken without becoming a queen. This satisfies the requirement.
+
+            Conclusion: The relationship is true for $n = k$, and thus implies its truth for $n = k + 1$ and so the relationship is true for all nonnegative integers (except for 2 and 4) by the Principle of Mathematical Induction.
+            
 		\end{solution}
 		
 	
